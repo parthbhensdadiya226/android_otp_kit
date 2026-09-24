@@ -1,0 +1,36 @@
+name: android_otp_kit
+description: >-
+  Android OTP login in one package: Phone Number Hint, SMS Retriever (zero-tap),
+  SMS User Consent fallback, app hash helper + CLI, and a self-filling OTP field.
+version: 0.1.0
+repository: https://github.com/parthbhensdadiya226/android_otp_kit
+issue_tracker: https://github.com/parthbhensdadiya226/android_otp_kit/issues
+topics: [otp, sms, autofill, authentication, android]
+
+environment:
+  sdk: ^3.8.0
+  flutter: '>=3.32.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  crypto: ^3.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+screenshots:
+  - description: 'OtpTextField in the outlined, circle, filled and custom styles.'
+    path: doc/otp_field_styles.png
+
+executables:
+  app_hash:
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: dev.parth.android_otp_kit
+        pluginClass: AndroidOtpKitPlugin
