@@ -7,7 +7,18 @@ A Flutter plugin for building OTP login screens on Android. It lets users pick t
 
 It wraps Google's Phone Number Hint, SMS Retriever and SMS User Consent APIs, and includes a small command-line tool to generate the app hash that the SMS Retriever needs.
 
-<img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/otp_field_styles.png" alt="OtpTextField in the outlined, circle, filled and custom styles" width="480">
+<table>
+  <tr>
+    <td align="center"><img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/sms_autofill.gif" alt="The OTP field filling itself when the SMS arrives" width="240"></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/phone_number_hint.png" alt="Google's phone number picker" width="240"></td>
+    <td align="center"><img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/sms_user_consent.png" alt="Google's SMS User Consent dialog" width="240"></td>
+  </tr>
+  <tr>
+    <td align="center">SMS Retriever autofill</td>
+    <td align="center">Phone Number Hint</td>
+    <td align="center">SMS User Consent</td>
+  </tr>
+</table>
 
 ## Features
 
@@ -153,6 +164,8 @@ Some SIMs, common in India, store the number without a `+`. Google's API then re
 It only changes a number when the returned one isn't valid and the corrected one is a valid number in the SIM's country. A correct number, including one from a second SIM, is returned as it is.
 
 ### The OTP field
+
+<img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/otp_field_styles.png" alt="OtpTextField in the outlined, circle, filled and custom styles" width="480">
 
 Show `OtpTextField` once you've requested the OTP:
 
