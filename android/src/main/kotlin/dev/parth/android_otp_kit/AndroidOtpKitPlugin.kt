@@ -51,12 +51,6 @@ class AndroidOtpKitPlugin :
          * TIMEOUT arriving much sooner than that is for an older request.
          */
         const val MIN_TIMEOUT_MS = 4 * 60 * 1000L
-
-        /** Countries that share the +1 calling code (North American Numbering Plan). */
-        val NANP_COUNTRIES = setOf(
-            "US", "CA", "AG", "AI", "AS", "BB", "BM", "BS", "DM", "DO", "GD", "GU", "JM", "KN",
-            "KY", "LC", "MP", "MS", "PR", "SX", "TC", "TT", "VC", "VG", "VI",
-        )
     }
 
     private lateinit var context: Context
@@ -141,21 +135,13 @@ class AndroidOtpKitPlugin :
             }
     }
 
-    /**
-     * Many SIMs (e.g. in India) store the number without a leading "+". Play services then
-     * formats it using the device locale's region, so on an en-US phone "919876543210"
-     * comes back as "+1919876543210". When the SIM is not from a +1 (NANP) country,
-     * re-read the digits using the SIM's country instead.
-     */
-    private fun fixNanpPrefix(number: String): String {
-        if (!number.startsWith("+1")) return number
+    /** Fixes a wrong country code; see [PhoneNumberNormalizer]. */
+    private fun normalizeNumber(number: String): String {
         val simIso = (context.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager)
-            ?.simCountryIso?.uppercase().orEmpty()
-        if (simIso.isEmpty() || simIso in NANP_COUNTRIES) return number
-        val digits = number.removePrefix("+1")
-        return PhoneNumberUtils.formatNumberToE164("+$digits", simIso) // "91XXXXXXXXXX"
-            ?: PhoneNumberUtils.formatNumberToE164(digits, simIso)    // national number
-            ?: number
+            ?.simCountryIso.orEmpty()
+        val localeRegion = context.resources.configuration.locales[0]?.country.orEmpty()
+        return PhoneNumberNormalizer(PhoneNumberUtils::formatNumberToE164)
+            .normalize(number, simIso, localeRegion)
     }
 
     private fun finishHint(block: (MethodChannel.Result) -> Unit) {
@@ -290,7 +276,7 @@ class AndroidOtpKitPlugin :
                 if (resultCode == Activity.RESULT_OK && data != null && activity != null) {
                     try {
                         val number = Identity.getSignInClient(activity!!).getPhoneNumberFromIntent(data)
-                        finishHint { it.success(fixNanpPrefix(number)) }
+                        finishHint { it.success(normalizeNumber(number)) }
                     } catch (e: Exception) {
                         finishHint { it.error("HINT_FAILED", e.message, null) }
                     }

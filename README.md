@@ -148,7 +148,9 @@ try {
 
 It returns the number in international format, or `null` when the user closes the picker. A good place to call it is when the phone field gets focus while it's still empty.
 
-Some SIMs, common in India, store the number without a `+`. On a phone set to US English, Google's API then returns it with a wrong `+1` in front. The package detects this and corrects it using the SIM's country, so you get `+91…` rather than `+1 91…`.
+Some SIMs, common in India, store the number without a `+`. Google's API then reads it using the phone's language region, so on a phone set to US English you get a wrong `+1` in front (`+1 91…`), and on UK English a wrong `+44`. The package detects this and corrects it using the SIM's country, so you get `+91…`.
+
+It only changes a number when the returned one isn't valid and the corrected one is a valid number in the SIM's country. A correct number, including one from a second SIM, is returned as it is.
 
 ### The OTP field
 
@@ -430,7 +432,7 @@ Errors come as a `PlatformException`, either thrown by `requestPhoneNumberHint` 
 
 **The consent dialog doesn't appear.** Check that the sender isn't in the phone's contacts, and that `senderPhoneNumber` matches the real sender. Alphanumeric sender IDs like `VM-MYAPP` won't match a phone number, so pass `null` in that case.
 
-**The picked number starts with `+1`.** Update to the latest version. The package corrects numbers from SIMs that store them without a `+`.
+**The picked number starts with the wrong country code (like `+1` or `+44`).** Update to the latest version. The package corrects numbers from SIMs that store them without a `+`. If you still see it, please open an issue with the phone's language, the SIM's country and the number format (with digits masked).
 
 **Nothing happens on iOS or web.** These APIs only exist on Android. On iOS, `OtpTextField` still gets the keyboard's one-time code suggestion from Messages.
 
