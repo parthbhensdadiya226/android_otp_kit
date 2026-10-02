@@ -455,3 +455,13 @@ Errors come as a `PlatformException`, either thrown by `requestPhoneNumberHint` 
 - **Issues and feature requests:** please open them on [GitHub](https://github.com/parthbhensdadiya226/android_otp_kit/issues).
 - **Contributing:** pull requests are welcome. Please run `flutter analyze` and `flutter test` before submitting.
 - **License:** MIT. See [LICENSE](https://github.com/parthbhensdadiya226/android_otp_kit/blob/main/LICENSE).
+
+## Support
+
+If this package saves you time, you can support its maintenance with a coffee:
+
+<a href="https://buymeacoffee.com/parthbhensdadiya"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="48"></a>
+
+Or scan the code:
+
+<img src="https://raw.githubusercontent.com/parthbhensdadiya226/android_otp_kit/main/doc/support_qr.png" width="160" alt="QR code for buymeacoffee.com/parthbhensdadiya">

@@ -2,9 +2,11 @@ name: android_otp_kit
 description: >-
   Android OTP login in one package: Phone Number Hint, SMS Retriever (zero-tap),
   SMS User Consent fallback, app hash helper + CLI, and a self-filling OTP field.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/parthbhensdadiya226/android_otp_kit
 issue_tracker: https://github.com/parthbhensdadiya226/android_otp_kit/issues
+funding:
+  - https://buymeacoffee.com/parthbhensdadiya
 topics: [otp, sms, autofill, authentication, android]
 
 environment:

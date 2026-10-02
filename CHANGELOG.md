@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Added a Buy Me a Coffee link (`funding` in pubspec and a Support section in the README).
+
 ## 0.1.0
 
 - Phone Number Hint (`requestPhoneNumberHint`). Numbers that come back with a wrong country code (the SIM stores the number without `+`, and Play services reads it using the phone's language region, e.g. `+1` on English (US) or `+44` on English (UK)) are corrected using the SIM's country. Valid numbers are never changed.
